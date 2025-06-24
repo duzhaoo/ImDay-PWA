@@ -81,74 +81,121 @@ body {
 /* 倒数日卡片样式 */
 .countdown-card {
     background: white;
-    border-radius: 12px;
-    padding: 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border: 1px solid rgba(0,0,0,0.04);
+    position: relative;
+    overflow: hidden;
+}
+
+.countdown-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #FF6347, #FF4500);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .countdown-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+.countdown-card:hover::before {
+    opacity: 1;
+}
+
+.countdown-card:active {
     transform: translateY(-2px);
+    transition: transform 0.1s ease;
 }
 
 .countdown-info {
     flex: 1;
+    padding-right: 16px;
 }
 
 .countdown-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 4px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 6px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .countdown-subtitle {
-    display: none;
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 4px;
 }
 
 .countdown-days-container {
     text-align: center;
-    min-width: 80px;
+    min-width: 90px;
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
+    position: relative;
 }
 
 .countdown-days {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 2.2rem;
+    font-weight: 800;
     color: white;
     line-height: 1;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .countdown-label {
-    font-size: 1rem;
-    color: white;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.9);
     margin: 0;
+    font-weight: 500;
+    letter-spacing: 0.5px;
 }
 
-/* 不同状态的颜色 */
-.countdown-card.blue .countdown-days-container {
-    background: linear-gradient(135deg, #4A90E2, #357ABD);
-    border-radius: 8px;
-    padding: 12px;
+/* 统一橙红色渐变 */
+.countdown-card .countdown-days-container {
+    background: linear-gradient(135deg, #FF6347 0%, #FF4500 100%);
+    border-radius: 12px;
+    padding: 16px 12px;
+    box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
 }
 
-.countdown-card.orange .countdown-days-container {
-    background: linear-gradient(135deg, #FF9500, #E6850E);
-    border-radius: 8px;
-    padding: 12px;
-}
-
-.countdown-card.gray .countdown-days-container {
-    background: linear-gradient(135deg, #FF6347, #FF4500);
-    border-radius: 8px;
-    padding: 12px;
+.countdown-card .countdown-days-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+    pointer-events: none;
 }
 
 /* 创建页面样式 */

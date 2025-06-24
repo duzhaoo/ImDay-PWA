@@ -129,14 +129,12 @@ function getCardClass(days) {
     }
 }
 
-function getSubtitle(days) {
-    if (days > 0) {
-        return `还有 ${days} 天`;
-    } else if (days === 0) {
-        return '就是今天！';
-    } else {
-        return `已过去 ${Math.abs(days)} 天`;
-    }
+function getSubtitle(countdown) {
+    const date = new Date(countdown.date);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${year}年${month}月${day}日开始`;
 }
 
 // 渲染倒数日列表
@@ -173,7 +171,7 @@ function renderCountdowns() {
     container.innerHTML = sortedCountdowns.map(countdown => {
         const days = calculateDays(countdown.date);
         const cardClass = getCardClass(days);
-        const subtitle = getSubtitle(days);
+        const subtitle = getSubtitle(countdown);
         
         return `
             <div class="countdown-card ${cardClass}" onclick="showDetailPage(${countdown.id})">
