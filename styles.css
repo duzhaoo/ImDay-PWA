@@ -41,7 +41,6 @@ body {
     align-items: center;
     padding: 20px;
     background: white;
-    border-bottom: 1px solid #f0f0f0;
 }
 
 .list-header h1 {
@@ -51,26 +50,25 @@ body {
 }
 
 .add-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     background: linear-gradient(135deg, #FF6347, #FF4500);
     color: white;
     border: none;
     border-radius: 50%;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 300;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(255, 99, 71, 0.3);
+    box-shadow: 0 2px 8px rgba(255, 99, 71, 0.3);
     transition: all 0.3s ease;
-    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .list-main {
     padding: 20px;
-    height: calc(100vh - 81px);
+    height: calc(100vh - 80px);
     overflow-y: auto;
 }
 
@@ -160,7 +158,6 @@ body {
     align-items: center;
     padding: 20px;
     background: white;
-    border-bottom: 1px solid #f0f0f0;
 }
 
 .create-header h1, .detail-header h1 {
@@ -238,7 +235,7 @@ input[type="date"]:focus {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: calc(100vh - 81px);
+    height: calc(100vh - 80px);
     padding: 20px;
     background: #f8f9fa;
 }
