@@ -50,13 +50,13 @@ body {
 }
 
 .add-btn {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     background: linear-gradient(135deg, #FF6347, #FF4500);
     color: white;
     border: none;
     border-radius: 50%;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 300;
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(255, 99, 71, 0.3);
@@ -141,7 +141,7 @@ body {
 .countdown-subtitle {
     display: block;
     font-size: 0.9rem;
-    color: #666;
+    color: #999;
     margin-top: 4px;
 }
 
@@ -205,6 +205,7 @@ body {
     align-items: center;
     padding: 20px;
     background: white;
+    border-bottom: 1px solid #f0f0f0;
 }
 
 .create-header h1, .detail-header h1 {
@@ -220,16 +221,34 @@ body {
     color: #FF4500;
     cursor: pointer;
     padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.back-btn:hover {
+    background-color: rgba(255, 69, 0, 0.1);
 }
 
 .save-btn {
-    background: none;
+    background: linear-gradient(135deg, #FF6347, #FF4500);
     border: none;
-    color: #FF4500;
+    color: white;
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
-    padding: 8px 12px;
+    padding: 10px 16px;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(255, 99, 71, 0.3);
+}
+
+.save-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 99, 71, 0.4);
+}
+
+.save-btn:active {
+    transform: translateY(0);
 }
 
 .delete-btn {
@@ -244,46 +263,209 @@ body {
 
 .create-main {
     padding: 20px;
+    background: #f8f9fa;
+    min-height: calc(100vh - 80px);
+}
+
+.create-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100%;
+    padding-top: 20px;
+}
+
+.create-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.create-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #FF6347, #FF4500);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    color: white;
+    box-shadow: 0 8px 25px rgba(255, 99, 71, 0.3);
+}
+
+.create-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.create-subtitle {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 32px;
+    line-height: 1.5;
+}
+
+.create-form {
+    text-align: left;
 }
 
 .form-group {
-    margin-bottom: 24px;
+    margin-bottom: 28px;
 }
 
 label {
     display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
+    margin-bottom: 12px;
+    font-weight: 600;
     color: #333;
     font-size: 1rem;
+}
+
+.input-wrapper, .date-input-wrapper {
+    position: relative;
+}
+
+.input-wrapper .input-icon,
+.date-input-wrapper .date-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    pointer-events: none;
 }
 
 input[type="text"],
 input[type="date"] {
     width: 100%;
-    padding: 16px;
-    border: 1px solid #E5E5EA;
-    border-radius: 12px;
+    padding: 18px 50px 18px 18px;
+    border: 2px solid #E5E5EA;
+    border-radius: 16px;
     font-size: 16px;
-    background: #F2F2F7;
-    transition: all 0.2s ease;
+    background: #F8F9FA;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
 }
 
 input[type="text"]:focus,
 input[type="date"]:focus {
     outline: none;
-    border-color: #007AFF;
+    border-color: #FF6347;
     background: white;
-    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+    box-shadow: 0 0 0 4px rgba(255, 99, 71, 0.1);
+    transform: translateY(-2px);
+}
+
+.date-shortcuts {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.date-shortcut {
+    background: #F0F0F0;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 1;
+    min-width: 70px;
+}
+
+.date-shortcut:hover {
+    background: #E0E0E0;
+    color: #333;
+}
+
+.date-shortcut:active {
+    background: linear-gradient(135deg, #FF6347, #FF4500);
+    color: white;
+    transform: scale(0.95);
+}
+
+.preview-section {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.preview-card {
+    background: linear-gradient(135deg, #FF6347, #FF4500);
+    border-radius: 16px;
+    padding: 24px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(255, 99, 71, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.preview-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.preview-title {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+}
+
+.preview-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.preview-days {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.preview-label {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.preview-date {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    position: relative;
+    z-index: 1;
 }
 
 /* 详情页面样式 */
 .detail-main {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     height: calc(100vh - 80px);
-    padding: 20px;
+    padding: 60px 20px 20px;
     background: #f8f9fa;
 }
 
@@ -296,6 +478,7 @@ input[type="date"]:focus {
     max-width: 400px;
     width: 100%;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-top: -20px;
 }
 
 .detail-card:hover {
@@ -316,28 +499,49 @@ input[type="date"]:focus {
     width: 100%;
     margin-bottom: 30px;
     padding: 20px;
-    background: linear-gradient(135deg, #FF6347, #FF4500);
+    background: linear-gradient(135deg, #FF6347 0%, #FF4500 100%);
     border-radius: 15px;
     color: white;
+    box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+    pointer-events: none;
 }
 
 .detail-days {
     font-size: 3.5rem;
-    font-weight: 700;
+    font-weight: 800;
     color: white;
     margin-bottom: 8px;
     line-height: 1;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 1;
 }
 
 .detail-label {
     font-size: 1.2rem;
     color: white;
     margin: 0;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 1;
 }
 
 .detail-date {
     font-size: 1.1rem;
-    color: #666;
+    color: #999;
     font-weight: 500;
     padding: 15px;
     background: #f8f9fa;
@@ -400,6 +604,100 @@ input[type="date"]:focus {
     
     .detail-days {
         font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .countdown-card {
+        margin: 0 10px 16px;
+    }
+    
+    .countdown-title {
+        font-size: 1.1rem;
+    }
+    
+    .countdown-days {
+        font-size: 2rem;
+    }
+    
+    .countdown-label {
+        font-size: 0.9rem;
+    }
+    
+    .detail-days {
+        font-size: 3rem;
+    }
+    
+    .detail-label {
+        font-size: 1rem;
+    }
+    
+    /* 创建页面移动端适配 */
+    .create-main {
+        padding: 16px;
+    }
+    
+    .create-container {
+        padding-top: 10px;
+    }
+    
+    .create-card {
+        padding: 30px 20px;
+        margin: 0 10px;
+        border-radius: 16px;
+    }
+    
+    .create-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 20px;
+    }
+    
+    .create-title {
+        font-size: 1.3rem;
+    }
+    
+    .create-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 24px;
+    }
+    
+    .form-group {
+        margin-bottom: 24px;
+    }
+    
+    input[type="text"],
+    input[type="date"] {
+        padding: 16px 45px 16px 16px;
+        border-radius: 12px;
+        font-size: 16px;
+    }
+    
+    .date-shortcuts {
+        gap: 6px;
+    }
+    
+    .date-shortcut {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+        min-width: 60px;
+    }
+    
+    .preview-card {
+        padding: 20px;
+        border-radius: 12px;
+    }
+    
+    .preview-days {
+        font-size: 2rem;
+    }
+    
+    .preview-label {
+        font-size: 1rem;
+    }
+    
+    .preview-date {
+        font-size: 0.8rem;
     }
 }
 
