@@ -1,0 +1,306 @@
+/* 基础样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.app {
+    max-width: 400px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: white;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 页面切换 */
+.page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: white;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.page.hidden {
+    transform: translateX(100%);
+}
+
+/* 列表页面样式 */
+.list-header {
+    background: linear-gradient(135deg, #FF6347 0%, #FF4500 100%);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.list-header h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.add-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-btn:hover {
+    background: rgba(255,255,255,0.3);
+    transform: scale(1.1);
+}
+
+.list-main {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.countdown-grid {
+    display: grid;
+    gap: 15px;
+}
+
+.countdown-card {
+    background: linear-gradient(135deg, #FF6347 0%, #FF4500 100%);
+    border-radius: 15px;
+    padding: 20px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255,99,71,0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.countdown-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255,99,71,0.4);
+}
+
+.countdown-info h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.countdown-info .days-passed {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.countdown-days {
+    text-align: center;
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 15px;
+    min-width: 80px;
+}
+
+.countdown-days .number {
+    font-size: 24px;
+    font-weight: bold;
+    display: block;
+}
+
+.countdown-days .label {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* 创建页面样式 */
+.create-header, .detail-header {
+    background: linear-gradient(135deg, #FF6347 0%, #FF4500 100%);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.create-header h1, .detail-header h1 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.back-btn, .save-btn {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+}
+
+.back-btn:hover, .save-btn:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+.create-main {
+    flex: 1;
+    padding: 30px 20px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e1e5e9;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #FF4500;
+    box-shadow: 0 0 0 3px rgba(255,69,0,0.1);
+}
+
+/* 详情页面样式 */
+.detail-main {
+    flex: 1;
+    padding: 40px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.detail-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 1px solid #f0f0f0;
+    width: 100%;
+    max-width: 320px;
+    transition: all 0.3s ease;
+}
+
+.detail-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.detail-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 30px;
+    line-height: 1.3;
+}
+
+.detail-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.detail-days {
+    font-size: 48px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #FF6347 0%, #FF4500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.detail-label {
+    font-size: 18px;
+    color: #666;
+    font-weight: 500;
+    margin-top: -10px;
+}
+
+.detail-date {
+    font-size: 16px;
+    color: #888;
+    padding: 10px 20px;
+    background: #f8f9fa;
+    border-radius: 25px;
+    margin-top: 10px;
+}
+
+/* 空状态 */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+}
+
+.empty-state h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+    .detail-card {
+        padding: 30px 20px;
+        margin: 0 10px;
+    }
+    
+    .detail-title {
+        font-size: 20px;
+        margin-bottom: 25px;
+    }
+    
+    .detail-days {
+        font-size: 40px;
+    }
+    
+    .detail-label {
+        font-size: 16px;
+    }
+    
+    .detail-date {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}

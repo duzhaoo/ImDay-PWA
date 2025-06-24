@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>倒数日 - ImDay</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icon-192x192.png">
+    <meta name="theme-color" content="#2196F3">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="倒数日">
+    <link rel="apple-touch-icon" href="icon-192x192.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app" id="app">
+        <!-- 列表页面 -->
+        <div class="page" id="listPage">
+            <header class="list-header">
+                <h1>倒数日</h1>
+                <button class="add-btn" onclick="showCreatePage()">+</button>
+            </header>
+            <main class="list-main">
+                <div id="countdowns" class="countdown-grid"></div>
+            </main>
+        </div>
+
+        <!-- 创建页面 -->
+        <div class="page hidden" id="createPage">
+            <header class="create-header">
+                <button class="back-btn" onclick="showListPage()">←</button>
+                <h1>新建倒数日</h1>
+                <button class="save-btn" onclick="saveCountdown()">保存</button>
+            </header>
+            <main class="create-main">
+                <div class="form-group">
+                    <label for="titleInput">标题</label>
+                    <input type="text" id="titleInput" placeholder="请输入倒数日标题">
+                </div>
+                <div class="form-group">
+                    <label for="dateInput">日期</label>
+                    <input type="date" id="dateInput">
+                </div>
+            </main>
+        </div>
+
+        <!-- 详情页面 -->
+        <div class="page hidden" id="detailPage">
+            <header class="detail-header">
+                <button class="back-btn" onclick="showListPage()">←</button>
+                <div></div>
+            </header>
+            <main class="detail-main">
+                <div class="detail-card">
+                    <h1 id="detailMainTitle" class="detail-title"></h1>
+                    <div class="detail-content">
+                        <div class="detail-days" id="detailDays"></div>
+                        <div class="detail-label">天</div>
+                        <div class="detail-date" id="detailDate"></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // 注册 Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
