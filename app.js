@@ -18,13 +18,6 @@ function showCreatePage() {
     // 清空表单
     document.getElementById('title').value = '';
     document.getElementById('date').value = '';
-    
-    // 更新预览
-    updatePreview();
-    
-    // 添加输入事件监听
-    document.getElementById('title').addEventListener('input', updatePreview);
-    document.getElementById('date').addEventListener('change', updatePreview);
 }
 
 function showDetailPage(id) {
@@ -58,63 +51,25 @@ function showDetailPage(id) {
 
 // 保存倒数日
 function saveCountdown() {
-    const title = document.getElementById('titleInput').value.trim();
-    const date = document.getElementById('dateInput').value;
+    const title = document.getElementById('title').value.trim();
+    const date = document.getElementById('date').value;
     
     if (!title || !date) {
-        showToast('请填写完整信息');
+        alert('请填写完整信息');
         return;
     }
-    
+
     const countdown = {
         id: Date.now(),
-        title: title,
-        date: date
+        title,
+        date,
+        createdAt: new Date().toISOString()
     };
-    
+
     countdowns.push(countdown);
-    localStorage.setItem('countdowns', JSON.stringify(countdowns));
-    
-    showToast('保存成功');
+    saveCountdowns();
     showListPage();
-}
-
-// 日期快捷按钮功能
-function setDateShortcut(days) {
-    const today = new Date();
-    const targetDate = new Date(today);
-    targetDate.setDate(today.getDate() + days);
-    
-    const dateString = targetDate.toISOString().split('T')[0];
-    document.getElementById('dateInput').value = dateString;
-    
-    updatePreview();
-}
-
-// 更新预览功能
-function updatePreview() {
-    const title = document.getElementById('titleInput').value.trim() || '我的纪念日';
-    const date = document.getElementById('dateInput').value;
-    
-    const previewTitle = document.querySelector('.preview-title');
-    const previewDays = document.querySelector('.preview-days');
-    const previewLabel = document.querySelector('.preview-label');
-    const previewDate = document.querySelector('.preview-date');
-    
-    if (previewTitle) previewTitle.textContent = title;
-    
-    if (date) {
-        const days = calculateDays(date);
-        const daysText = getDaysText(days);
-        
-        if (previewDays) previewDays.textContent = Math.abs(days);
-        if (previewLabel) previewLabel.textContent = daysText;
-        if (previewDate) previewDate.textContent = formatDate(date);
-    } else {
-        if (previewDays) previewDays.textContent = '0';
-        if (previewLabel) previewLabel.textContent = '选择日期';
-        if (previewDate) previewDate.textContent = '请选择一个日期';
-    }
+    showToast('倒数日添加成功！');
 }
 
 
