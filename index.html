@@ -34,14 +34,16 @@
                 <button class="save-btn" onclick="saveCountdown()">保存</button>
             </header>
             <main class="create-main">
-                <div class="form-group">
-                    <label for="titleInput">标题</label>
-                    <input type="text" id="titleInput" placeholder="请输入倒数日标题">
-                </div>
-                <div class="form-group">
-                    <label for="dateInput">日期</label>
-                    <input type="date" id="dateInput">
-                </div>
+                <form id="countdownForm">
+                    <div class="form-group">
+                        <label for="title">标题</label>
+                        <input type="text" id="title" placeholder="输入标题" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">日期</label>
+                        <input type="date" id="date" required>
+                    </div>
+                </form>
             </main>
         </div>
 
@@ -50,15 +52,16 @@
             <header class="detail-header">
                 <button class="back-btn" onclick="showListPage()">←</button>
                 <div></div>
+                <div></div>
             </header>
             <main class="detail-main">
                 <div class="detail-card">
-                    <h1 id="detailMainTitle" class="detail-title"></h1>
+                    <h2 class="detail-title" id="detailMainTitle">标题</h2>
                     <div class="detail-content">
-                        <div class="detail-days" id="detailDays"></div>
-                        <div class="detail-label">天</div>
-                        <div class="detail-date" id="detailDate"></div>
+                        <div class="detail-days" id="detailDays">0</div>
+                        <div class="detail-label" id="detailLabel">天</div>
                     </div>
+                    <div class="detail-date" id="detailDate">2024年1月1日</div>
                 </div>
             </main>
         </div>

@@ -53,10 +53,9 @@ self.addEventListener('fetch', event => {
             return response;
           }
           
-          // 克隆响应
+          // 克隆响应，因为响应流只能使用一次
           const responseToCache = response.clone();
           
-          // 添加到缓存
           caches.open(CACHE_NAME)
             .then(cache => {
               cache.put(event.request, responseToCache);
@@ -64,8 +63,10 @@ self.addEventListener('fetch', event => {
           
           return response;
         }).catch(() => {
-          // 网络失败时，尝试返回缓存的首页
-          return caches.match('/index.html');
+          // 网络失败时，如果是导航请求，返回缓存的首页
+          if (event.request.destination === 'document') {
+            return caches.match('/index.html');
+          }
         });
       })
   );
