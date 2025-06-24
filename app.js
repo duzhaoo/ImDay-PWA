@@ -44,14 +44,19 @@ function showDetailPage(id) {
     
     // 设置详情页颜色
     const detailDays = document.getElementById('detailDays');
+    const detailLabel = document.getElementById('detailLabel');
     if (days > 30) {
         detailDays.style.color = '#4A90E2';
+        detailLabel.style.color = 'white';
     } else if (days > 7) {
         detailDays.style.color = '#FF9500';
+        detailLabel.style.color = 'white';
     } else if (days >= 0) {
         detailDays.style.color = '#FF3B30';
+        detailLabel.style.color = 'white';
     } else {
         detailDays.style.color = '#8E8E93';
+        detailLabel.style.color = 'white';
     }
 }
 
