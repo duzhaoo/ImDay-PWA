@@ -17,7 +17,13 @@ function showCreatePage() {
     
     // 清空表单
     document.getElementById('title').value = '';
-    document.getElementById('date').value = '';
+    
+    // 设置日期选择框默认为今天
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    document.getElementById('date').value = `${year}-${month}-${day}`;
 }
 
 function showDetailPage(id) {
