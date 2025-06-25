@@ -307,15 +307,7 @@ input[type="date"] {
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.2s ease;
+    display: none;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator:hover {
@@ -440,10 +432,12 @@ input[type="text"]::placeholder {
     line-height: 1.5;
 }
 
-/* 响应式设计 */
+/* 小屏手机适配 */
 @media (max-width: 480px) {
     .app {
         max-width: 100%;
+        margin: 0;
+        border-radius: 0;
     }
     
     .list-header, .create-header, .detail-header {
@@ -456,10 +450,15 @@ input[type="text"]::placeholder {
     
     .countdown-card {
         padding: 14px;
+        margin-bottom: 12px;
     }
     
     .countdown-days {
         font-size: 1.8rem;
+    }
+    
+    .countdown-title {
+        font-size: 0.95rem;
     }
     
     .detail-days {
@@ -475,14 +474,119 @@ input[type="text"]::placeholder {
         font-size: 1.5rem;
     }
     
-    .detail-days {
-        font-size: 2.8rem;
+    .form-group {
+        margin-bottom: 18px;
+    }
+    
+    input[type="text"],
+    input[type="date"] {
+        padding: 16px 18px;
+        font-size: 16px;
     }
 }
 
-@media (min-width: 768px) {
+/* 中等屏幕手机适配 */
+@media (min-width: 481px) and (max-width: 767px) {
     .app {
+        max-width: 100%;
+        margin: 0;
+    }
+    
+    .countdown-card {
+        padding: 16px;
+        margin-bottom: 14px;
+    }
+    
+    .countdown-days {
+        font-size: 2rem;
+    }
+    
+    .detail-card {
+        padding: 35px 25px;
+        margin: 15px;
+    }
+    
+    .detail-days {
+        font-size: 3.8rem;
+    }
+}
+
+/* iPad 和平板适配 */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .app {
+        max-width: 600px;
         box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        border-radius: 20px;
+        margin-top: 20px;
+        min-height: calc(100vh - 40px);
+    }
+    
+    .list-header, .create-header, .detail-header {
+        padding: 24px 30px;
+    }
+    
+    .list-main, .create-main {
+        padding: 20px 30px;
+    }
+    
+    .countdown-card {
+        padding: 20px;
+        margin-bottom: 16px;
+    }
+    
+    .countdown-days {
+        font-size: 2.2rem;
+    }
+    
+    .countdown-title {
+        font-size: 1.1rem;
+    }
+    
+    .detail-card {
+        padding: 40px 30px;
+        margin: 20px;
+    }
+    
+    .detail-days {
+        font-size: 4rem;
+    }
+    
+    .detail-title {
+        font-size: 1.8rem;
+    }
+    
+    .form-group {
+        margin-bottom: 24px;
+    }
+    
+    .form-group label {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    
+    input[type="text"],
+    input[type="date"] {
+        padding: 20px 24px;
+        font-size: 1.1rem;
+    }
+}
+
+/* 大屏幕适配 */
+@media (min-width: 1025px) {
+    .app {
+        max-width: 500px;
+        box-shadow: 0 0 30px rgba(0,0,0,0.15);
+        border-radius: 24px;
+        margin-top: 40px;
+        min-height: calc(100vh - 80px);
+    }
+    
+    .list-header, .create-header, .detail-header {
+        padding: 28px 32px;
+    }
+    
+    .list-main, .create-main {
+        padding: 24px 32px;
     }
 }
 
@@ -652,6 +756,39 @@ input[type="text"]::placeholder {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     transform: translateY(-50%);
     animation: modalSlideIn 0.3s ease-out;
+}
+
+/* 模态框响应式设计 */
+@media (min-width: 768px) {
+    .modal-content {
+        margin: 40% auto;
+        max-width: 400px;
+        border-radius: 24px;
+    }
+    
+    .modal-header {
+        padding: 24px 30px 20px;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .modal-body {
+        padding: 0 30px 30px;
+    }
+    
+    .backup-btn, .restore-btn {
+        padding: 16px 24px;
+        font-size: 1.1rem;
+    }
+}
+
+@media (min-width: 1025px) {
+    .modal-content {
+        margin: 35% auto;
+        max-width: 450px;
+    }
 }
 
 @keyframes modalSlideIn {

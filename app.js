@@ -337,4 +337,16 @@ const app = new CountdownApp();
 // 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', function() {
     renderCountdowns();
+    
+    // 添加日期框整行点击事件
+    const dateFormGroup = document.querySelector('.form-group:has(#date)');
+    if (dateFormGroup) {
+        dateFormGroup.style.cursor = 'pointer';
+        dateFormGroup.addEventListener('click', function(e) {
+            // 如果点击的不是日期输入框本身，则触发日期输入框的点击
+            if (e.target.id !== 'date') {
+                document.getElementById('date').click();
+            }
+        });
+    }
 });
