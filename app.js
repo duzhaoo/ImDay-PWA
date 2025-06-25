@@ -242,6 +242,98 @@ function showToast(message) {
     }, 2000);
 }
 
+// 备份恢复功能
+function showBackupModal() {
+    document.getElementById('backupModal').style.display = 'block';
+}
+
+function hideBackupModal() {
+    document.getElementById('backupModal').style.display = 'none';
+}
+
+// 备份数据
+function backupData() {
+    try {
+        const data = {
+            countdowns: countdowns,
+            exportTime: new Date().toISOString(),
+            version: '1.0'
+        };
+        
+        const dataStr = JSON.stringify(data, null, 2);
+        const dataBlob = new Blob([dataStr], { type: 'application/json' });
+        
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(dataBlob);
+        link.download = `倒数日备份_${new Date().toLocaleDateString('zh-CN').replace(/\//g, '-')}.json`;
+        
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        showToast('数据备份成功！');
+        hideBackupModal();
+    } catch (error) {
+        console.error('备份失败:', error);
+        showToast('备份失败，请重试');
+    }
+}
+
+// 恢复数据
+function restoreData() {
+    document.getElementById('fileInput').click();
+}
+
+// 处理文件恢复
+function handleFileRestore(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    if (!file.name.endsWith('.json')) {
+        showToast('请选择JSON格式的备份文件');
+        return;
+    }
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const data = JSON.parse(e.target.result);
+            
+            // 验证数据格式
+            if (!data.countdowns || !Array.isArray(data.countdowns)) {
+                throw new Error('无效的备份文件格式');
+            }
+            
+            // 确认恢复
+            if (confirm(`确定要恢复数据吗？\n\n备份时间: ${data.exportTime ? new Date(data.exportTime).toLocaleString('zh-CN') : '未知'}\n倒数日数量: ${data.countdowns.length}\n\n当前数据将被覆盖！`)) {
+                countdowns = data.countdowns;
+                saveCountdowns();
+                renderCountdowns();
+                showToast('数据恢复成功！');
+                hideBackupModal();
+            }
+        } catch (error) {
+            console.error('恢复失败:', error);
+            showToast('文件格式错误，恢复失败');
+        }
+    };
+    
+    reader.readAsText(file);
+    // 清空文件输入，允许重复选择同一文件
+    event.target.value = '';
+}
+
+// 点击弹框外部关闭
+window.onclick = function(event) {
+    const modal = document.getElementById('backupModal');
+    if (event.target === modal) {
+        hideBackupModal();
+    }
+}
+
+// 初始化应用
+const app = new CountdownApp();
+
 // 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', function() {
     renderCountdowns();

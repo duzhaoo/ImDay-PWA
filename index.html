@@ -18,7 +18,7 @@
         <!-- 列表页面 -->
         <div class="page" id="listPage">
             <header class="list-header">
-                <h1>倒数日</h1>
+                <h1 onclick="showBackupModal()">倒数日</h1>
                 <button class="add-btn" onclick="showCreatePage()">+</button>
             </header>
             <main class="list-main">
@@ -64,6 +64,21 @@
                     <div class="detail-date" id="detailDate">2024年1月1日</div>
                 </div>
             </main>
+        </div>
+    </div>
+
+    <!-- 备份恢复弹框 -->
+    <div class="modal" id="backupModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>数据管理</h3>
+                <button class="close-btn" onclick="hideBackupModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <button class="backup-btn" onclick="backupData()">📤 备份数据</button>
+                <button class="restore-btn" onclick="restoreData()">📥 恢复数据</button>
+                <input type="file" id="fileInput" accept=".json" style="display: none;" onchange="handleFileRestore(event)">
+            </div>
         </div>
     </div>
 
