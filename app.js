@@ -351,9 +351,9 @@ function initDatePicker() {
     const monthSelect = document.getElementById('monthSelect');
     const daySelect = document.getElementById('daySelect');
     
-    // 初始化年份选择器（当前年份前后10年）
+    // 初始化年份选择器（从1990年到未来50年）
     const currentYear = currentDate.getFullYear();
-    for (let year = currentYear - 10; year <= currentYear + 50; year++) {
+    for (let year = 1990; year <= currentYear + 50; year++) {
         const option = document.createElement('option');
         option.value = year;
         option.textContent = year + '年';

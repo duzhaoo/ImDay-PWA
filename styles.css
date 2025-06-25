@@ -372,24 +372,26 @@ input[type="date"] {
 
 .date-picker-content {
     background-color: white;
-    margin: 50% auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     padding: 0;
     border-radius: 20px;
     width: 90%;
     max-width: 380px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    transform: translateY(-50%);
     animation: datePickerSlideIn 0.3s ease-out;
 }
 
 @keyframes datePickerSlideIn {
     from {
         opacity: 0;
-        transform: translateY(-40%) scale(0.9);
+        transform: translate(-50%, -50%) scale(0.9);
     }
     to {
         opacity: 1;
-        transform: translateY(-50%) scale(1);
+        transform: translate(-50%, -50%) scale(1);
     }
 }
 
@@ -517,7 +519,6 @@ input[type="date"] {
 @media (max-width: 480px) {
     .date-picker-content {
         width: 95%;
-        margin: 40% auto;
         border-radius: 16px;
     }
     
@@ -579,7 +580,6 @@ input[type="date"] {
     .date-picker-content {
         width: 70%;
         max-width: 420px;
-        margin: 45% auto;
     }
     
     .date-picker-header {
@@ -595,7 +595,6 @@ input[type="date"] {
     .date-picker-content {
         width: 50%;
         max-width: 450px;
-        margin: 40% auto;
     }
     
     .date-picker-header {
