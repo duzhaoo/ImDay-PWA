@@ -106,19 +106,7 @@ body {
     transition: opacity 0.3s ease;
 }
 
-.countdown-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-}
-
-.countdown-card:hover::before {
-    opacity: 1;
-}
-
-.countdown-card:active {
-    transform: translateY(-2px);
-    transition: transform 0.1s ease;
-}
+/* 悬浮效果已移除 */
 
 .countdown-info {
     flex: 1;
@@ -147,7 +135,7 @@ body {
 
 .countdown-days-container {
     text-align: center;
-    min-width: 90px;
+    min-width: 70px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -157,7 +145,7 @@ body {
 }
 
 .countdown-days {
-    font-size: 2.2rem;
+    font-size: 1.6rem;
     font-weight: 800;
     color: white;
     line-height: 1;
@@ -176,7 +164,7 @@ body {
 .countdown-card .countdown-days-container {
     background: linear-gradient(135deg, #FF6347 0%, #FF4500 100%);
     border-radius: 12px;
-    padding: 16px 12px;
+    padding: 12px 10px;
     box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3);
     position: relative;
     overflow: hidden;
@@ -337,10 +325,6 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 input[type="text"]:focus,
 input[type="date"]:focus {
     outline: none;
-    border-color: #FF6347;
-    background: white;
-    box-shadow: 0 4px 20px rgba(255, 99, 71, 0.15), 0 0 0 3px rgba(255, 99, 71, 0.1);
-    transform: translateY(-2px);
 }
 
 input[type="text"]::placeholder {
@@ -348,23 +332,7 @@ input[type="text"]::placeholder {
     font-weight: 400;
 }
 
-/* 表单增强效果 */
-.form-group::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #FF6347, #FF4500);
-    border-radius: 1px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.form-group:focus-within::before {
-    opacity: 1;
-}
+/* 表单增强效果已移除 */
 
 /* 详情页面样式 */
 .detail-main {
@@ -388,10 +356,7 @@ input[type="text"]::placeholder {
     margin-top: -20px;
 }
 
-.detail-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-}
+
 
 .detail-title {
     font-size: 1.8rem;
@@ -444,6 +409,7 @@ input[type="text"]::placeholder {
     letter-spacing: 0.5px;
     position: relative;
     z-index: 1;
+    opacity: 0.5;
 }
 
 .detail-date {
