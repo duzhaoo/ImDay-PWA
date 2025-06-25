@@ -38,7 +38,7 @@ function showDetailPage(id) {
     // 更新详情页内容
     document.getElementById('detailMainTitle').textContent = countdown.title;
     const days = calculateDays(countdown.date);
-    document.getElementById('detailDays').textContent = Math.abs(days);
+    document.getElementById('detailDays').textContent = Math.abs(days) + '天';
     document.getElementById('detailLabel').textContent = getDaysText(days);
     document.getElementById('detailDate').textContent = formatDate(countdown.date);
     
@@ -55,7 +55,7 @@ function showDetailPage(id) {
         detailDays.style.color = '#FF3B30';
         detailLabel.style.color = 'white';
     } else {
-        detailDays.style.color = '#8E8E93';
+        detailDays.style.color = 'white';
         detailLabel.style.color = 'white';
     }
 }
