@@ -18,12 +18,25 @@ function showCreatePage() {
     // 清空表单
     document.getElementById('title').value = '';
     
-    // 设置日期选择框默认为今天
+    // 重置自定义日期选择器为今天
     const today = new Date();
     const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-    document.getElementById('date').value = `${year}-${month}-${day}`;
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+    
+    // 更新隐藏的日期字段
+    const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+    document.getElementById('date').value = formattedDate;
+    
+    // 更新显示的日期文本
+    const selectedDateElement = document.getElementById('selectedDate');
+    selectedDateElement.textContent = `${year}年${month}月${day}日`;
+    selectedDateElement.classList.remove('placeholder');
+    
+    // 更新全局变量
+    selectedYear = year;
+    selectedMonth = month;
+    selectedDay = day;
 }
 
 function showDetailPage(id) {
@@ -42,22 +55,17 @@ function showDetailPage(id) {
     document.getElementById('detailLabel').textContent = getDaysText(days);
     document.getElementById('detailDate').textContent = formatDate(countdown.date);
     
-    // 设置详情页颜色
+    // 设置详情页统一样式
+    const detailContent = document.querySelector('.detail-content');
     const detailDays = document.getElementById('detailDays');
     const detailLabel = document.getElementById('detailLabel');
-    if (days > 30) {
-        detailDays.style.color = '#4A90E2';
-        detailLabel.style.color = 'white';
-    } else if (days > 7) {
-        detailDays.style.color = '#FF9500';
-        detailLabel.style.color = 'white';
-    } else if (days >= 0) {
-        detailDays.style.color = '#FF3B30';
-        detailLabel.style.color = 'white';
-    } else {
-        detailDays.style.color = 'white';
-        detailLabel.style.color = 'white';
-    }
+    
+    // 移除所有状态类，使用统一的橙红渐变样式
+    detailContent.classList.remove('past', 'today', 'future-far', 'future-near', 'future-soon');
+    
+    // 确保天数文字始终为白色
+    detailDays.style.color = 'white';
+    detailLabel.style.color = 'white';
 }
 
 // 保存倒数日
@@ -334,19 +342,155 @@ window.onclick = function(event) {
 // 初始化应用
 const app = new CountdownApp();
 
+// 自定义日期选择器相关函数
+let selectedYear, selectedMonth, selectedDay;
+
+function initDatePicker() {
+    const currentDate = new Date();
+    const yearSelect = document.getElementById('yearSelect');
+    const monthSelect = document.getElementById('monthSelect');
+    const daySelect = document.getElementById('daySelect');
+    
+    // 初始化年份选择器（当前年份前后10年）
+    const currentYear = currentDate.getFullYear();
+    for (let year = currentYear - 10; year <= currentYear + 50; year++) {
+        const option = document.createElement('option');
+        option.value = year;
+        option.textContent = year + '年';
+        if (year === currentYear) option.selected = true;
+        yearSelect.appendChild(option);
+    }
+    
+    // 初始化月份选择器
+    for (let month = 1; month <= 12; month++) {
+        const option = document.createElement('option');
+        option.value = month;
+        option.textContent = month + '月';
+        if (month === currentDate.getMonth() + 1) option.selected = true;
+        monthSelect.appendChild(option);
+    }
+    
+    // 初始化日期选择器
+    updateDayOptions();
+    
+    // 监听年份和月份变化，更新日期选项
+    yearSelect.addEventListener('change', updateDayOptions);
+    monthSelect.addEventListener('change', updateDayOptions);
+    
+    // 设置默认选中今天
+    selectedYear = currentYear;
+    selectedMonth = currentDate.getMonth() + 1;
+    selectedDay = currentDate.getDate();
+    daySelect.value = selectedDay;
+    
+    // 初始化隐藏的日期字段和显示文本
+    const formattedDate = `${selectedYear}-${selectedMonth.toString().padStart(2, '0')}-${selectedDay.toString().padStart(2, '0')}`;
+    document.getElementById('date').value = formattedDate;
+    
+    const selectedDateElement = document.getElementById('selectedDate');
+    selectedDateElement.textContent = `${selectedYear}年${selectedMonth}月${selectedDay}日`;
+    selectedDateElement.classList.remove('placeholder');
+}
+
+function updateDayOptions() {
+    const yearSelect = document.getElementById('yearSelect');
+    const monthSelect = document.getElementById('monthSelect');
+    const daySelect = document.getElementById('daySelect');
+    
+    const year = parseInt(yearSelect.value);
+    const month = parseInt(monthSelect.value);
+    const daysInMonth = new Date(year, month, 0).getDate();
+    
+    // 清空现有选项
+    daySelect.innerHTML = '';
+    
+    // 添加新的日期选项
+    for (let day = 1; day <= daysInMonth; day++) {
+        const option = document.createElement('option');
+        option.value = day;
+        option.textContent = day + '日';
+        daySelect.appendChild(option);
+    }
+    
+    // 如果之前选中的日期在新月份中存在，保持选中
+    if (selectedDay && selectedDay <= daysInMonth) {
+        daySelect.value = selectedDay;
+    } else {
+        daySelect.value = 1;
+    }
+}
+
+function openDatePicker() {
+    const modal = document.getElementById('datePickerModal');
+    const hiddenInput = document.getElementById('date');
+    
+    // 如果隐藏输入框有值，使用该值初始化选择器
+    if (hiddenInput.value) {
+        const date = new Date(hiddenInput.value);
+        selectedYear = date.getFullYear();
+        selectedMonth = date.getMonth() + 1;
+        selectedDay = date.getDate();
+        
+        document.getElementById('yearSelect').value = selectedYear;
+        document.getElementById('monthSelect').value = selectedMonth;
+        updateDayOptions();
+        document.getElementById('daySelect').value = selectedDay;
+    }
+    
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeDatePicker() {
+    const modal = document.getElementById('datePickerModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+function confirmDateSelection() {
+    const yearSelect = document.getElementById('yearSelect');
+    const monthSelect = document.getElementById('monthSelect');
+    const daySelect = document.getElementById('daySelect');
+    
+    selectedYear = parseInt(yearSelect.value);
+    selectedMonth = parseInt(monthSelect.value);
+    selectedDay = parseInt(daySelect.value);
+    
+    // 格式化日期为 YYYY-MM-DD
+    const formattedDate = `${selectedYear}-${selectedMonth.toString().padStart(2, '0')}-${selectedDay.toString().padStart(2, '0')}`;
+    
+    // 更新隐藏的日期输入框
+    document.getElementById('date').value = formattedDate;
+    
+    // 更新显示的日期
+    const selectedDateElement = document.getElementById('selectedDate');
+    selectedDateElement.textContent = `${selectedYear}年${selectedMonth}月${selectedDay}日`;
+    selectedDateElement.classList.remove('placeholder');
+    
+    closeDatePicker();
+}
+
 // 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', function() {
     renderCountdowns();
+    initDatePicker();
     
     // 添加日期框整行点击事件
-    const dateFormGroup = document.querySelector('.form-group:has(#date)');
+    const dateFormGroup = document.querySelector('.form-group:has(.custom-date-picker)');
     if (dateFormGroup) {
         dateFormGroup.style.cursor = 'pointer';
         dateFormGroup.addEventListener('click', function(e) {
-            // 如果点击的不是日期输入框本身，则触发日期输入框的点击
-            if (e.target.id !== 'date') {
-                document.getElementById('date').click();
+            // 如果点击的不是选择器内部元素，则打开日期选择器
+            if (!e.target.closest('.date-picker-modal')) {
+                openDatePicker();
             }
         });
     }
+    
+    // 点击模态框背景关闭
+    document.getElementById('datePickerModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeDatePicker();
+        }
+    });
 });

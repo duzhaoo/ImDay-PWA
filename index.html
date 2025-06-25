@@ -41,7 +41,18 @@
                     </div>
                     <div class="form-group">
                         <label for="date">日期</label>
-                        <input type="date" id="date" required>
+                        <div class="custom-date-picker" id="customDatePicker">
+                            <div class="date-display" id="dateDisplay">
+                                <span id="selectedDate" class="placeholder">选择日期</span>
+                                <svg class="date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                            </div>
+                            <input type="hidden" id="date" required>
+                        </div>
                     </div>
                 </form>
             </main>
@@ -67,7 +78,37 @@
         </div>
     </div>
 
-    <!-- 备份恢复弹框 -->
+    <!-- 自定义日期选择器弹框 -->
+        <div class="date-picker-modal" id="datePickerModal">
+            <div class="date-picker-content">
+                <div class="date-picker-header">
+                    <h3>选择日期</h3>
+                    <button class="close-btn" onclick="closeDatePicker()">×</button>
+                </div>
+                <div class="date-picker-body">
+                    <div class="date-selectors">
+                        <div class="selector-group">
+                            <label>年份</label>
+                            <select id="yearSelect" class="date-select"></select>
+                        </div>
+                        <div class="selector-group">
+                            <label>月份</label>
+                            <select id="monthSelect" class="date-select"></select>
+                        </div>
+                        <div class="selector-group">
+                            <label>日期</label>
+                            <select id="daySelect" class="date-select"></select>
+                        </div>
+                    </div>
+                    <div class="date-picker-actions">
+                        <button class="cancel-btn" onclick="closeDatePicker()">取消</button>
+                        <button class="confirm-btn" onclick="confirmDateSelection()">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 备份恢复弹框 -->
     <div class="modal" id="backupModal">
         <div class="modal-content">
             <div class="modal-header">

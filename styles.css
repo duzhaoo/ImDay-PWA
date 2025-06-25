@@ -306,8 +306,309 @@ input[type="date"] {
     padding-right: 50px;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
+/* 自定义日期选择器样式 */
+.custom-date-picker {
+    position: relative;
+    width: 100%;
+}
+
+.date-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 18px 20px;
+    border: 2px solid #E8E8ED;
+    border-radius: 16px;
+    font-size: 16px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    font-weight: 500;
+    box-sizing: border-box;
+    min-height: 58px;
+}
+
+.date-display:hover {
+    border-color: #4A90E2;
+    box-shadow: 0 4px 20px rgba(74, 144, 226, 0.1);
+}
+
+.date-display:focus-within {
+    border-color: #4A90E2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+    outline: none;
+}
+
+#selectedDate {
+    color: #333;
+    flex: 1;
+}
+
+#selectedDate.placeholder {
+    color: #999;
+}
+
+.date-icon {
+    width: 20px;
+    height: 20px;
+    color: #666;
+    stroke-width: 2;
+}
+
+/* 日期选择器弹框样式 */
+.date-picker-modal {
     display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.date-picker-content {
+    background-color: white;
+    margin: 50% auto;
+    padding: 0;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 380px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transform: translateY(-50%);
+    animation: datePickerSlideIn 0.3s ease-out;
+}
+
+@keyframes datePickerSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-40%) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+    }
+}
+
+.date-picker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.date-picker-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+    background: #f5f5f5;
+    color: #666;
+}
+
+.date-picker-body {
+    padding: 20px 24px 24px;
+}
+
+.date-selectors {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.selector-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.selector-group label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #666;
+    margin: 0;
+}
+
+.date-select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #E8E8ED;
+    border-radius: 12px;
+    font-size: 16px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23666" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+    padding-right: 40px;
+}
+
+.date-select:focus {
+    outline: none;
+    border-color: #4A90E2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.date-picker-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.cancel-btn, .confirm-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 80px;
+}
+
+.cancel-btn {
+    background: #f5f5f5;
+    color: #666;
+}
+
+.cancel-btn:hover {
+    background: #e8e8e8;
+}
+
+.confirm-btn {
+    background: linear-gradient(135deg, #FF6347 0%, #FF4500 100%);
+    color: white;
+}
+
+.confirm-btn:hover {
+    background: linear-gradient(135deg, #FF4500 0%, #E03E00 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 99, 71, 0.3);
+}
+
+/* 日期选择器响应式设计 */
+@media (max-width: 480px) {
+    .date-picker-content {
+        width: 95%;
+        margin: 40% auto;
+        border-radius: 16px;
+    }
+    
+    .date-picker-header {
+        padding: 16px 20px 12px;
+    }
+    
+    .date-picker-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .date-picker-body {
+        padding: 16px 20px 20px;
+    }
+    
+    .date-selectors {
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 20px;
+    }
+    
+    .selector-group {
+        flex: none;
+    }
+    
+    .date-select {
+        padding: 14px 16px;
+        font-size: 16px;
+    }
+    
+    .date-picker-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .cancel-btn, .confirm-btn {
+        width: 100%;
+        padding: 14px 24px;
+    }
+    
+    .date-display {
+        padding: 16px 18px;
+        min-height: 54px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .date-picker-content {
+        width: 85%;
+        max-width: 400px;
+    }
+    
+    .date-selectors {
+        gap: 16px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .date-picker-content {
+        width: 70%;
+        max-width: 420px;
+        margin: 45% auto;
+    }
+    
+    .date-picker-header {
+        padding: 24px 28px 20px;
+    }
+    
+    .date-picker-body {
+        padding: 24px 28px 28px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .date-picker-content {
+        width: 50%;
+        max-width: 450px;
+        margin: 40% auto;
+    }
+    
+    .date-picker-header {
+        padding: 28px 32px 24px;
+    }
+    
+    .date-picker-body {
+        padding: 28px 32px 32px;
+    }
+    
+    .date-selectors {
+        gap: 20px;
+    }
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator:hover {
@@ -369,6 +670,37 @@ input[type="text"]::placeholder {
     box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3);
     position: relative;
     overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* 所有状态统一使用橙红渐变 */
+.detail-content.past {
+    background: linear-gradient(135deg, #FF6347 0%, #FF4500 100%);
+    box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3);
+}
+
+/* 今天 - 橙红渐变 */
+.detail-content.today {
+    background: linear-gradient(135deg, #FF6347 0%, #FF4500 100%);
+    box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3);
+}
+
+/* 未来7天内 - 橙红渐变 */
+.detail-content.future-soon {
+    background: linear-gradient(135deg, #FF6347 0%, #FF4500 100%);
+    box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3);
+}
+
+/* 未来8-30天 - 橙红渐变 */
+.detail-content.future-near {
+    background: linear-gradient(135deg, #FF6347 0%, #FF4500 100%);
+    box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3);
+}
+
+/* 未来30天以上 - 橙红渐变 */
+.detail-content.future-far {
+    background: linear-gradient(135deg, #FF6347 0%, #FF4500 100%);
+    box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3);
 }
 
 .detail-content::before {
@@ -385,7 +717,7 @@ input[type="text"]::placeholder {
 .detail-days {
     font-size: 3.5rem;
     font-weight: 800;
-    color: white;
+    color: white !important;
     margin-bottom: 8px;
     line-height: 1;
     text-shadow: 0 2px 4px rgba(0,0,0,0.2);
@@ -401,7 +733,24 @@ input[type="text"]::placeholder {
     letter-spacing: 0.5px;
     position: relative;
     z-index: 1;
-    opacity: 0.5;
+    opacity: 0.9;
+}
+
+/* 确保所有状态下文字都是白色 */
+.detail-content.past .detail-days,
+.detail-content.today .detail-days,
+.detail-content.future-soon .detail-days,
+.detail-content.future-near .detail-days,
+.detail-content.future-far .detail-days {
+    color: white !important;
+}
+
+.detail-content.past .detail-label,
+.detail-content.today .detail-label,
+.detail-content.future-soon .detail-label,
+.detail-content.future-near .detail-label,
+.detail-content.future-far .detail-label {
+    color: white !important;
 }
 
 .detail-date {
@@ -632,7 +981,7 @@ input[type="text"]::placeholder {
 }
 
 .countdown-item {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(135deg, #FF6347 0%, #FF4500 100%);
     border-radius: 12px;
     padding: 20px;
     margin-bottom: 15px;
@@ -860,23 +1209,23 @@ input[type="text"]::placeholder {
 }
 
 .backup-btn {
-    background: linear-gradient(135deg, #4CAF50, #45a049);
+    background: linear-gradient(135deg, #FF6347, #FF4500);
     color: white;
 }
 
 .backup-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+    box-shadow: 0 8px 25px rgba(255, 99, 71, 0.3);
 }
 
 .restore-btn {
-    background: linear-gradient(135deg, #2196F3, #1976D2);
+    background: linear-gradient(135deg, #FF6347, #FF4500);
     color: white;
 }
 
 .restore-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(33, 150, 243, 0.3);
+    box-shadow: 0 8px 25px rgba(255, 99, 71, 0.3);
 }
 
 .list-header h1 {
