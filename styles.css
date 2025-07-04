@@ -253,13 +253,33 @@ body {
 }
 
 .delete-btn {
-    background: none;
+    background: rgba(255, 69, 0, 0.1);
     border: none;
     color: #FF4500;
-    font-size: 1rem;
-    font-weight: 500;
     cursor: pointer;
-    padding: 8px 12px;
+    padding: 10px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.delete-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2;
+}
+
+.delete-btn:hover {
+    background: rgba(255, 69, 0, 0.15);
+    transform: scale(1.05);
+}
+
+.delete-btn:active {
+    transform: scale(0.95);
 }
 
 .create-main {
@@ -1035,29 +1055,7 @@ input[type="text"]::placeholder {
     margin-top: 5px;
 }
 
-.delete-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: rgba(255,255,255,0.2);
-    border: none;
-    color: white;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s ease;
-}
 
-.delete-btn:hover {
-    background: rgba(255,255,255,0.3);
-    transform: none;
-    box-shadow: none;
-}
 
 .empty-state {
     text-align: center;

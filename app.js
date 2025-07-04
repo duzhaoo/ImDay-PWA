@@ -212,6 +212,31 @@ function saveCountdowns() {
     localStorage.setItem('countdowns', JSON.stringify(countdowns));
 }
 
+// 删除倒数日
+function deleteCountdown() {
+    if (!currentCountdownId) return;
+    
+    const countdown = countdowns.find(c => c.id === currentCountdownId);
+    if (!countdown) return;
+    
+    if (confirm(`确定要删除"${countdown.title}"吗？\n\n删除后无法恢复！`)) {
+        // 从数组中移除
+        countdowns = countdowns.filter(c => c.id !== currentCountdownId);
+        
+        // 保存到本地存储
+        saveCountdowns();
+        
+        // 显示成功提示
+        showToast('倒数日删除成功！');
+        
+        // 返回列表页面
+        showListPage();
+        
+        // 清空当前ID
+        currentCountdownId = null;
+    }
+}
+
 // 显示提示消息
 function showToast(message) {
     // 创建简单的提示
